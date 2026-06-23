@@ -6,10 +6,8 @@ import {
   showLoader,
   hideLoader,
 } from './js/render-functions.js';
-import SimpleLightbox from 'simplelightbox';
 
 import 'izitoast/dist/css/iziToast.min.css';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const formElement = document.querySelector('.form');
 const inputElement = formElement.querySelector('[name="search-text"]');
@@ -23,20 +21,25 @@ function handleSubmit(e) {
   const inputtedText = inputElement.value.trim();
   if (inputtedText) {
     let appData = [];
-    fetchData(inputtedText).then(data => {
-      hideLoader();
-      if (data.length === 0) {
-        iziToast.error({
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-        });
-      } else {
-        appData = data;
-        console.log(appData);
-        createGallery(appData);
-      }
-    });
+    fetchData(inputtedText)
+      .then(data => {
+        hideLoader();
+        if (data.length === 0) {
+          iziToast.error({
+            message:
+              'Sorry, there are no images matching your search query. Please try again!',
+          });
+        } else {
+          appData = data;
+          console.log(appData);
+          createGallery(appData);
+        }
+      })
+      .catch(error => {
+        hideLoader();
+      });
   } else {
+    hideLoader();
     iziToast.error({
       message: 'Please input some word',
     });
