@@ -37,6 +37,9 @@ function handleSubmit(e) {
       })
       .catch(error => {
         hideLoader();
+        iziToast.error({
+          message: 'Something went wrong with request',
+        });
       });
   } else {
     hideLoader();
