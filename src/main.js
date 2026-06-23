@@ -24,8 +24,8 @@ function handleSubmit(e) {
   if (inputtedText) {
     let appData = [];
     fetchData(inputtedText).then(data => {
+      hideLoader();
       if (data.length === 0) {
-        hideLoader();
         iziToast.error({
           message:
             'Sorry, there are no images matching your search query. Please try again!',

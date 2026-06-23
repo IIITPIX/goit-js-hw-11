@@ -5,7 +5,7 @@ const galleryElement = document.querySelector('.gallery');
 
 let gallery = new SimpleLightbox('.gallery a');
 
-const loader = document.createElement('span');
+const loader = document.querySelector('.loader');
 
 export function createGallery(images) {
   const linksList = images.map(
@@ -44,10 +44,9 @@ export function clearGallery() {
 }
 
 export function showLoader() {
-  loader.classList.add('loader');
-  galleryElement.insertAdjacentElement('afterbegin', loader);
+  loader.classList.remove('hidden');
 }
 
 export function hideLoader() {
-  loader.remove();
+  loader.classList.add('hidden');
 }
